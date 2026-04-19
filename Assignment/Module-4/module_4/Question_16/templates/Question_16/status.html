@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q16 | Payment Status</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#020617] min-h-screen flex flex-col font-sans text-slate-200">
+    <!-- Navbar -->
+    <nav class="p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 text-slate-400">
+                <span class="font-medium font-heading">Payment Gateway</span>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-600">Module 4 / Q16</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center px-4 py-8">
+        <div class="max-w-md w-full">
+            <div class="bg-slate-900/50 backdrop-blur-3xl border border-slate-800 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden text-center">
+                
+                {% if status == 'SUCCESS' %}
+                    <!-- Success Decorative -->
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-600/10 rounded-full blur-3xl"></div>
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-[2.5rem] bg-emerald-500/10 text-emerald-400 mb-8 border border-emerald-500/20 shadow-inner">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-white mb-3 leading-tight">Payment <span class="text-emerald-400">Successful</span></h2>
+                    <p class="text-slate-400 mb-8 leading-relaxed">Your transaction has been processed securely and your appointment is confirmed.</p>
+                {% else %}
+                    <!-- Failure Decorative -->
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-rose-600/10 rounded-full blur-3xl"></div>
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-[2.5rem] bg-rose-500/10 text-rose-400 mb-8 border border-rose-500/20 shadow-inner">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-white mb-3 leading-tight">Payment <span class="text-rose-400">Failed</span></h2>
+                    <p class="text-slate-400 mb-8 leading-relaxed">
+                        Something went wrong during the transaction processing.
+                        {% if message %}<br><span class="text-rose-400/80 text-sm italic">{{ message }}</span>{% endif %}
+                    </p>
+                {% endif %}
+
+                {% if transaction %}
+                <div class="text-left bg-slate-950 border border-slate-800/50 rounded-2xl p-5 mb-8 space-y-4">
+                    <div class="flex justify-between items-center pb-4 border-b border-slate-800/50">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Order ID</span>
+                        <span class="text-sm font-mono text-slate-300">{{ transaction.order_id }}</span>
+                    </div>
+                    
+                    {% if transaction.transaction_id %}
+                    <div class="flex justify-between items-center pb-4 border-b border-slate-800/50">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Transaction ID</span>
+                        <span class="text-sm font-mono text-slate-300">{{ transaction.transaction_id }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Total Amount</span>
+                        <span class="text-lg font-bold text-white">₹{{ transaction.amount }}</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <a href="/" class="flex items-center justify-center gap-3 w-full py-5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all border border-slate-700 hover:border-slate-600 shadow-xl shadow-slate-900/50 leading-6">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    Return to Dashboard
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-10 text-center opacity-30 text-xs font-medium uppercase tracking-widest text-slate-600 leading-6">
+        Transaction Resolution Screen
+    </footer>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q10 | Validation Module</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#020617] min-h-screen flex flex-col font-sans text-slate-200">
+    <!-- Navbar -->
+    <nav class="p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="{% url 'home' %}" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <span class="font-medium font-heading">Dashboard</span>
+            </a>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-600">Module 4 / Q10</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center px-4 py-8">
+        <div class="max-w-md w-full">
+            <div class="bg-slate-900/50 backdrop-blur-3xl border border-slate-800 rounded-[3rem] p-8 md:p-12 shadow-2xl">
+                <div class="text-center mb-10">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-[2.5rem] bg-indigo-500/10 text-indigo-400 mb-6 border border-indigo-500/20">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-white mb-2 leading-6">Form Validation</h2>
+                    <p class="text-slate-500 text-sm leading-6">Advanced client-side field verification module.</p>
+                </div>
+
+                <form id="patientForm" onsubmit="return validateForm()" class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-600 ml-1">Full Name</label>
+                        <input type="text" id="name" placeholder="John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-indigo-500/50 transition-all font-medium">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-5">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-slate-600 ml-1">Age</label>
+                            <input type="number" id="age" placeholder="25" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-indigo-500/50 transition-all font-medium">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-slate-600 ml-1">Gender</label>
+                            <div class="relative">
+                                <select id="gender" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-indigo-500/50 transition-all appearance-none font-medium">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-600 leading-6">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-600 ml-1">Email (Regex Check)</label>
+                        <input type="text" id="email" placeholder="john@domain.com" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-indigo-500/50 transition-all font-medium">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-600 ml-1">Phone (10 Digits)</label>
+                        <input type="text" id="phone" placeholder="9876543210" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-indigo-500/50 transition-all font-medium">
+                    </div>
+
+                    <button type="submit" class="w-full py-5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl transition-all shadow-xl shadow-indigo-500/20 transform hover:-translate-y-1 active:translate-y-0 mt-4 leading-6">
+                        Verify & Submit
+                    </button>
+                </form>
+
+                <div id="error-container" class="mt-8 min-h-[1.5rem] p-3 rounded-xl bg-red-500/5 border border-red-500/10">
+                    <p id="error" class="text-red-400 text-xs font-bold uppercase tracking-wider text-center leading-6"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-10 text-center opacity-30 text-xs font-medium uppercase tracking-widest text-slate-600 leading-6">
+        Pattern Matching & Logic Validation
+    </footer>
+
+    <script>
+    function validateForm() {
+      let name = document.getElementById("name").value.trim();
+      let age = document.getElementById("age").value;
+      let email = document.getElementById("email").value.trim();
+      let phone = document.getElementById("phone").value.trim();
+      let gender = document.getElementById("gender").value;
+      let error = document.getElementById("error");
+
+      error.innerHTML = "";
+
+      if (name === "") {
+        error.innerHTML = "Name is required";
+        return false;
+      }
+
+      if (age === "" || age <= 0 || age > 120) {
+        error.innerHTML = "Enter a valid age (1-120)";
+        return false;
+      }
+
+      let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        error.innerHTML = "Enter a valid email";
+        return false;
+      }
+
+      let phonePattern = /^[0-9]{10}$/;
+      if (!phone.match(phonePattern)) {
+        error.innerHTML = "Enter a valid 10-digit phone number";
+        return false;
+      }
+
+      if (gender === "") {
+        error.innerHTML = "Please select gender";
+        return false;
+      }
+
+      alert("Form submitted successfully!");
+      return true;
+    }
+    </script>
+</body>
+</html>

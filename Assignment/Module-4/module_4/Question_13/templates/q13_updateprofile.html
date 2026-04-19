@@ -1,0 +1,40 @@
+{% extends 'q13_base.html' %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+<div class="max-w-md w-full">
+    <div class="bg-slate-900/50 backdrop-blur-2xl border border-slate-800 rounded-[3rem] p-8 md:p-12 shadow-2xl">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-[2.5rem] bg-amber-500/10 text-amber-400 mb-6 border border-amber-500/20">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            </div>
+            <h2 class="text-3xl font-heading font-bold text-white mb-2 leading-6">Modify Credentials</h2>
+            <p class="text-slate-500 text-sm leading-6">Adjust your professional identifiers below.</p>
+        </div>
+
+    <form method="POST" class="space-y-6">
+        {% csrf_token %}
+
+        <div class="space-y-2">
+            <label class="text-xs font-bold uppercase tracking-widest text-slate-600 ml-1">Current Name</label>
+            <input type="text" name="name" value="{{stid.name}}" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-amber-500/50 transition-all font-medium">
+        </div>
+
+        <div class="space-y-2">
+            <label class="text-xs font-bold uppercase tracking-widest text-slate-600 ml-1">Contact Number</label>
+            <input type="tel" name="phone" value="{{stid.phone}}" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-amber-500/50 transition-all font-medium">
+        </div>
+
+        <button type="submit" class="w-full py-5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-2xl transition-all shadow-xl shadow-amber-500/20 transform hover:-translate-y-1 active:translate-y-0 mt-4 leading-6">
+            Apply Modifications
+        </button>
+    </form>
+
+    <div class="mt-8 text-center leading-6">
+        <a href="/q13/q13_showprofile" class="text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-white transition-colors">Discard Changes</a>
+    </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 9 | Doctor Finder Routing</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 min-h-screen flex flex-col font-sans text-slate-200">
+
+    <!-- Global Header/Navbar for Q9 -->
+    <header class="sticky top-0 z-50 glass border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand/Home Link -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl tracking-tight text-white">DR. FINDER</span>
+                </div>
+                
+                <!-- Routing Navigation -->
+                <nav class="flex items-center space-x-1 md:space-x-4">
+                    <a href="/q9" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-white/5 border border-transparent hover:border-white/10 {% if request.path == '/q9/' %} bg-indigo-500/10 text-indigo-400 border-indigo-500/20 {% else %} text-slate-400 {% endif %}">Home</a>
+                    <a href="/q9/q9_profile" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-white/5 border border-transparent hover:border-white/10 {% if 'profile' in request.path %} bg-indigo-500/10 text-indigo-400 border-indigo-500/20 {% else %} text-slate-400 {% endif %}">Profile</a>
+                    <a href="/q9/q9_contact" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-white/5 border border-transparent hover:border-white/10 {% if 'contact' in request.path %} bg-indigo-500/10 text-indigo-400 border-indigo-500/20 {% else %} text-slate-400 {% endif %}">Contact</a>
+                </nav>
+
+                <!-- Dashboard Back Link (Hidden on small screens) -->
+                <div class="hidden md:block border-l border-slate-700/50 pl-4 ml-4">
+                    <a href="{% url 'home' %}" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex items-center justify-center p-6 sm:p-12">
+        <div class="max-w-4xl w-full text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-indigo-500/10 text-indigo-400 mb-8 border border-indigo-500/20 animate-pulse">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6">Home <span class="text-indigo-400">Environment</span></h1>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Welcome to the primary hub of our Doctor Finder application. This page serves as the entry point for demonstrating Django's URL routing capabilities.
+            </p>
+            
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50 text-left">
+                    <h3 class="font-bold text-white mb-2 underline decoration-indigo-500/50 underline-offset-4">Module Objective</h3>
+                    <p class="text-sm text-slate-400">Implement dynamic URL routing to navigate between different core pages of a 'Doctor Finder' platform.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50 text-left">
+                    <h3 class="font-bold text-white mb-2 underline decoration-indigo-500/50 underline-offset-4">Routing Logic</h3>
+                    <p class="text-sm text-slate-400">Handled by Django's <code>urls.py</code> configuration within the Question 9 application directory.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-10 text-center opacity-30 text-xs font-medium uppercase tracking-widest text-slate-500">
+        Dynamic URL Routing System
+    </footer>
+
+</body>
+</html>

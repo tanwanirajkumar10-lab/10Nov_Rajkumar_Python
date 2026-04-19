@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 5 | Environment Setup</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f172a] min-h-screen flex flex-col font-sans text-slate-200">
+    <!-- Navbar -->
+    <nav class="p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="{% url 'home' %}" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <span class="font-medium font-heading">Dashboard</span>
+            </a>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Module 4 / Q5</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="max-w-3xl w-full bg-slate-800/50 backdrop-blur-xl border border-slate-700 p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 mb-8 border border-amber-500/30">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86 3.86l-.477 2.387a2 2 0 001.57 2.339l.113.018a2 2 0 002.094-1.235l1.017-2.54a2 2 0 011.273-1.273l2.54-1.017a2 2 0 001.235-2.094l-.018-.113z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12V4.5m0 0l-3 3m3-3l3 3"/></svg>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight text-center md:text-left">Environment & <br><span class="text-amber-400">Dependency Isolation</span></h1>
+            
+            <div class="space-y-6 text-lg text-slate-300">
+                <p class="leading-relaxed">A robust development workflow starts with environment isolation. This module covers the essential setup steps:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-2xl bg-slate-900/50 border border-slate-700">
+                        <h3 class="text-amber-400 font-bold mb-2">Venv Activation</h3>
+                        <p class="text-sm">Isolating Python dependencies to avoid system-wide conflicts.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-slate-900/50 border border-slate-700">
+                        <h3 class="text-amber-400 font-bold mb-2">Django Installation</h3>
+                        <p class="text-sm">Configuring the project core through the pip package manager.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-10 text-center opacity-30 text-xs font-medium uppercase tracking-widest text-slate-500">
+        Prerequisites & Tooling
+    </footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 4 | Directory Structure</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f172a] min-h-screen flex flex-col font-sans text-slate-200">
+    <!-- Navbar -->
+    <nav class="p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="{% url 'home' %}" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <span class="font-medium font-heading">Dashboard</span>
+            </a>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Module 4 / Q4</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="max-w-3xl w-full bg-slate-800/50 backdrop-blur-xl border border-slate-700 p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-500/20 text-blue-400 mb-8 border border-blue-500/30">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight text-center md:text-left">Understanding Django <br><span class="text-blue-400">Directory Structure</span></h1>
+            
+            <div class="space-y-6 text-lg text-slate-300">
+                <p class="leading-relaxed">This module focuses on the initialization of a Django project and comprehensive understanding of its standard directory architecture. Key components include:</p>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></div>
+                        <span><strong class="text-white">manage.py</strong>: The command-line utility for administrative tasks.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></div>
+                        <span><strong class="text-white">settings.py</strong>: Centralized project configuration.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></div>
+                        <span><strong class="text-white">urls.py</strong>: Primary routing system for the application.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-10 text-center opacity-30 text-xs font-medium uppercase tracking-widest text-slate-500">
+        Project Initialization Phase
+    </footer>
+</body>
+</html>

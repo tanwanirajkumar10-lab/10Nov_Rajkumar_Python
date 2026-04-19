@@ -1,0 +1,27 @@
+{% extends 'q13_base.html' %}
+
+{% block title %}Dashboard Home{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl w-full text-center">
+    <div class="inline-flex items-center justify-center w-24 h-24 rounded-[3rem] bg-indigo-500/10 text-indigo-400 mb-8 border border-indigo-500/20">
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-6 leading-tight transition-all duration-700 ease-out translate-y-0 opacity-100">Welcome to the<br><span class="text-indigo-500">Secure Portal</span></h1>
+    <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10">
+        Your medical data and professional profile are protected by our advanced session-based authentication system.
+    </p>
+
+    {% if request.session.user %}
+        <div class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold uppercase tracking-widest text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Session Active: {{ request.session.user }}
+        </div>
+    {% else %}
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="/q13" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl transition-all shadow-xl shadow-indigo-500/20 w-full sm:w-auto">Get Started</a>
+            <a href="/q13/q13_signup" class="px-8 py-4 border border-slate-700 hover:border-slate-500 text-slate-400 hover:text-white font-bold rounded-2xl transition-all w-full sm:w-auto">Create Account</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

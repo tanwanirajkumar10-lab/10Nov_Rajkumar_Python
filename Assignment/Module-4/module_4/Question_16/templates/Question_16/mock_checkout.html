@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paytm Checkout - Secure Payment</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        paytm: {
+                            blue: '#00baf2',
+                            dark: '#002e6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center font-sans tracking-tight">
+
+    <div class="w-full max-w-md mx-4">
+        <div class="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-100">
+            <!-- Header -->
+            <div class="bg-paytm-dark p-6 flex justify-between items-center text-white">
+                <div class="text-2xl font-bold tracking-tight">Pay<span class="text-paytm-blue">tm</span></div>
+                <div class="text-xs uppercase tracking-widest font-bold text-white/70">Secure Gateway</div>
+            </div>
+            
+            <!-- Amount Section -->
+            <div class="p-8 text-center border-b border-slate-100 bg-slate-50/50">
+                <div class="text-slate-500 text-sm font-semibold uppercase tracking-widest mb-2">Total Payable Amout</div>
+                <div class="text-5xl font-heading font-extrabold text-slate-800 mb-2">₹{{ success_params.TXNAMOUNT }}</div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/50 text-slate-500 text-xs font-mono font-medium">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                    OID: {{ success_params.ORDERID }}
+                </div>
+            </div>
+
+            <!-- Payment Actions -->
+            <div class="p-8 space-y-4">
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest text-center mb-6">Simulation Controls</h3>
+
+                <!-- Success Form -->
+                <form action="{% url 'payment_callback' %}" method="POST">
+                    {% csrf_token %}
+                    {% for key, value in success_params.items %}
+                        <input type="hidden" name="{{ key }}" value="{{ value }}">
+                    {% endfor %}
+                    <input type="hidden" name="CHECKSUMHASH" value="{{ success_checksum }}">
+                    <button type="submit" class="w-full py-4 bg-paytm-blue hover:bg-[#00a8dc] text-white font-bold rounded-2xl transition-all shadow-lg shadow-paytm-blue/30 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Simulate Success
+                    </button>
+                </form>
+
+                <!-- Failure Form -->
+                <form action="{% url 'payment_callback' %}" method="POST">
+                    {% csrf_token %}
+                    {% for key, value in failure_params.items %}
+                        <input type="hidden" name="{{ key }}" value="{{ value }}">
+                    {% endfor %}
+                    <input type="hidden" name="CHECKSUMHASH" value="{{ failure_checksum }}">
+                    <button type="submit" class="w-full py-4 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-rose-500/30 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Simulate Failure
+                    </button>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="bg-slate-50 p-6 text-center border-t border-slate-100">
+                <div class="flex items-center justify-center gap-2 text-[10px] uppercase font-bold tracking-widest text-slate-400">
+                    <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+                    256-bit Encrypted Mock Gateway
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

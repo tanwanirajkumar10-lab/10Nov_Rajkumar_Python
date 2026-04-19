@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q13 | {% block title %}Session Auth{% endblock %}</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#020617] min-h-screen flex flex-col font-sans text-slate-200">
+
+    <!-- Premium Navbar -->
+    <nav class="sticky top-0 z-50 glass border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Branding -->
+                <a href="/" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    <span class="font-medium font-heading">Back to dashboard</span>
+                </a>
+
+                <!-- Navigation -->
+                <nav class="flex items-center space-x-1 md:space-x-4">
+                    {% if request.session.user %}
+                        <a href="/q13/q13_home" class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-all hover:bg-white/5 text-slate-400 hover:text-white">Home</a>
+                        <a href="/q13/q13_showprofile" class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-all hover:bg-white/5 text-slate-400 hover:text-white">Profile</a>
+                        <a href="/q13/q13_resetpassword" class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-all hover:bg-white/5 text-slate-400 hover:text-white">Security</a>
+                        <a href="/q13/q13_userlogout" class="px-3 py-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-red-500/20 transition-all ml-4">Logout</a>
+                    {% else %}
+                        <a href="/q13" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 hover:bg-indigo-700 transition-all">Login</a>
+                        <a href="/q13/q13_signup" class="px-4 py-2 border border-slate-700 rounded-xl text-sm font-bold text-slate-400 hover:text-white hover:border-slate-500 transition-all">Join</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Block -->
+    <main class="flex-grow flex items-center justify-center p-6">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="p-10 text-center opacity-30 text-xs font-medium uppercase tracking-widest text-slate-600">
+        Authentication & Session Management
+    </footer>
+
+</body>
+</html>

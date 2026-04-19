@@ -1,0 +1,5 @@
+{
+    "venvPath": "D:\\",
+    "venv": "myenv",
+    "extraPaths": ["D:/myenv/Lib/site-packages"]
+}
