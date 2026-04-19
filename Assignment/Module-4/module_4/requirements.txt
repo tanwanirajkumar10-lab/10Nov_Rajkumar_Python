@@ -3,7 +3,7 @@ certifi==2026.2.25
 cffi==2.0.0
 charset-normalizer==3.4.7
 cryptography==46.0.7
-Django==5.0.14
+Django==4.2.16
 django-allauth==65.16.0
 django-stubs==6.0.2
 django-stubs-ext==6.0.2
