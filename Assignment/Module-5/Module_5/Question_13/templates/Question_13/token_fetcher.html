@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Fetcher - Question 13</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 450px; }
+        h1 { color: #333; font-size: 24px; margin-bottom: 20px; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #666; font-size: 14px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 12px; background-color: #007bff; border: none; border-radius: 6px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #0056b3; }
+        #result-container { margin-top: 25px; display: none; }
+        #result-container h2 { font-size: 16px; color: #333; margin-bottom: 10px; }
+        .token-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 6px; word-break: break-all; font-family: monospace; color: #d63384; font-size: 14px; position: relative; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 6px; margin-top: 15px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>DRF Token Fetcher</h1>
+        <p style="color: #888; font-size: 14px; text-align: center; margin-bottom: 20px;">Enter your credentials to obtain an API Authentication Token.</p>
+        
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter password">
+        </div>
+        <button onclick="fetchToken()">Get Token</button>
+
+        <div id="error-box" class="error"></div>
+
+        <div id="result-container">
+            <h2>Your API Token:</h2>
+            <div class="token-box" id="token-display"></div>
+            <p style="font-size: 12px; color: #666; margin-top: 10px;">Use this in your header: <br><strong>Authorization: Token [your_token]</strong></p>
+            
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            
+            <button onclick="testAPI()" style="background-color: #28a745;">Test Protected API</button>
+            <div id="test-results" style="margin-top: 15px; display: none;">
+                <h3 style="font-size: 14px; margin-bottom: 5px;">API Response:</h3>
+                <pre id="api-output" style="background: #f1f3f5; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto; max-height: 200px;"></pre>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="/" style="text-decoration: none; color: #666; font-size: 14px;">&larr; Go Back To Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        let currentToken = '';
+
+        async function fetchToken() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorBox = document.getElementById('error-box');
+            const resultContainer = document.getElementById('result-container');
+            const tokenDisplay = document.getElementById('token-display');
+
+            errorBox.style.display = 'none';
+            resultContainer.style.display = 'none';
+
+            try {
+                const response = await fetch('/q13/api-token-auth/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    currentToken = data.token;
+                    tokenDisplay.innerText = data.token;
+                    resultContainer.style.display = 'block';
+                } else {
+                    errorBox.innerText = data.non_field_errors || "Invalid credentials.";
+                    errorBox.style.display = 'block';
+                }
+            } catch (err) {
+                errorBox.innerText = "Connection error.";
+                errorBox.style.display = 'block';
+            }
+        }
+
+        async function testAPI() {
+            const apiOutput = document.getElementById('api-output');
+            const testResults = document.getElementById('test-results');
+            testResults.style.display = 'block';
+            apiOutput.innerText = "Fetching...";
+
+            try {
+                const response = await fetch('/q13/doctors/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Token ${currentToken}`
+                    }
+                });
+
+                const data = await response.json();
+                apiOutput.innerText = JSON.stringify(data, null, 2);
+            } catch (err) {
+                apiOutput.innerText = "Error: " + err.message;
+            }
+        }
+    </script>
+</body>
+</html>

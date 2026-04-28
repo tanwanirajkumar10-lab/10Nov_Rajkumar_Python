@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP - Question 10</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        h1 { color: #1c1e21; margin-bottom: 20px; }
+        input[type="text"] { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #dddfe2; border-radius: 6px; box-sizing: border-box; font-size: 24px; text-align: center; letter-spacing: 10px; }
+        button { width: 100%; padding: 12px; background-color: #42b72a; border: none; border-radius: 6px; color: white; font-size: 18px; font-weight: bold; cursor: pointer; }
+        button:hover { background-color: #36a420; }
+        .alert { padding: 10px; margin-bottom: 20px; border-radius: 6px; font-size: 14px; text-align: left; }
+        .alert-error { background-color: #ffebe9; color: #cf222e; border: 1px solid #ff8182; }
+        .alert-success { background-color: #dafbe1; color: #1a7f37; border: 1px solid #4ac26d; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Verify OTP</h1>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="otp" maxlength="6" placeholder="000000" required>
+            <button type="submit">Verify & Login</button>
+        </form>
+        <p style="margin-top: 15px;"><a href="{% url 'process-otp' %}" style="color: #1877f2; text-decoration: none;">Resend code</a></p>
+        <hr style="margin-top: 20px; border: 0; border-top: 1px solid #eee;">
+        <a href="/" style="display: inline-block; margin-top: 15px; text-decoration: none; color: #606770; font-size: 14px;">&larr; Go Back To Dashboard</a>
+    </div>
+</body>
+</html>

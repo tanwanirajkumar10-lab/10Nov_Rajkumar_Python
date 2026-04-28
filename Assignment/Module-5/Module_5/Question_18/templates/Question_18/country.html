@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Finder – Country Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --bg: #f3f4f6;
+            --text: #111827;
+        }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg); color: var(--text); padding: 40px; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 600px; }
+        
+        .search-area { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; text-align: center; }
+        h1 { margin: 0 0 20px 0; font-size: 24px; color: var(--primary); }
+        .search-box { display: flex; gap: 10px; }
+        input { flex: 1; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 16px; outline: none; transition: 0.2s; }
+        input:focus { border-color: var(--primary); }
+        button { padding: 12px 24px; background: var(--primary); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #1d4ed8; }
+
+        .country-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .flag-box { height: 200px; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #eee; }
+        .flag-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .info-content { padding: 30px; }
+        .country-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; }
+        .country-name { margin: 0; font-size: 32px; font-weight: 600; }
+        .region { color: #6b7280; font-size: 16px; }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .stat-item { background: #f9fafb; padding: 15px; border-radius: 16px; border: 1px solid #eff1f3; }
+        .stat-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
+        .stat-value { font-size: 18px; font-weight: 600; color: #374151; }
+
+        .error { background: #fee2e2; color: #991b1b; padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-size: 14px; }
+        .back-link { margin-top: 40px; color: #6b7280; text-decoration: none; font-size: 14px; }
+        .back-link:hover { text-decoration: underline; color: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-area">
+            <h1>Global Finder</h1>
+            <form method="GET" class="search-box">
+                <input type="text" name="name" placeholder="Enter country name (e.g. India, Japan)" required value="{{ search_name|default:'' }}">
+                <button type="submit">Explore</button>
+            </form>
+        </div>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if country %}
+            <div class="country-card">
+                <div class="flag-box">
+                    <img src="{{ country.flag }}" alt="Flag of {{ country.name }}">
+                </div>
+                <div class="info-content">
+                    <div class="country-header">
+                        <div>
+                            <h2 class="country-name">{{ country.name }}</h2>
+                            <span class="region">{{ country.subregion }} ({{ country.region }})</span>
+                        </div>
+                        <div style="font-size: 32px;">{{ country.emoji }}</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Population</div>
+                            <div class="stat-value">{{ country.population }}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Capital</div>
+                            <div class="stat-value">{{ country.capital }}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Languages</div>
+                            <div class="stat-value">{{ country.languages }}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Currency</div>
+                            <div class="stat-value">{{ country.currency }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <a href="/" class="back-link">&larr; Go Back To Dashboard</a>
+    </div>
+</body>
+</html>

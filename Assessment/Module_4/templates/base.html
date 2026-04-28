@@ -23,11 +23,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    {% if request.path != '/' and request.path != '/writesphere/' %}
                     <li class="nav-item me-3">
                         <a class="btn btn-outline-secondary btn-sm" href="http://127.0.0.1:8000/"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
                     </li>
-                    {% endif %}
                     {% if user.is_authenticated %}
                         {% if user.role == 'author' or user.role == 'admin' %}
                             <li class="nav-item me-2">

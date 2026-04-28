@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profiles - Question 8</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f4f7f6; color: #333; }
+        h1 { color: #2c3e50; text-align: center; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .doctor-card { border-bottom: 1px solid #eee; padding: 15px 0; }
+        .doctor-card:last-child { border-bottom: none; }
+        .doctor-card h2 { margin: 0; color: #3498db; }
+        .specialty { font-weight: bold; color: #e67e22; }
+        .experience { color: #7f8c8d; }
+        .contact { font-style: italic; }
+        .back-link { display: block; margin-top: 20px; text-decoration: none; color: #3498db; }
+        .back-link:hover { text-decoration: underline; }
+        .no-data { text-align: center; color: #95a5a6; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Doctor Profiles</h1>
+        
+        {% if doctors %}
+            {% for doctor in doctors %}
+                <div class="doctor-card">
+                    <h2>Dr. {{ doctor.name }}</h2>
+                    <p class="specialty">{{ doctor.specialty }}</p>
+                    <p class="experience">{{ doctor.experience }} years of experience</p>
+                    <p class="contact">Contact: {{ doctor.contact_number }}</p>
+                    {% if doctor.about %}
+                        <p>{{ doctor.about }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-data">
+                <p>No doctor profiles found in the database.</p>
+                <p>Please add some through the <a href="/admin/Question_8/doctor/add/" target="_blank">Django Admin Panel</a>.</p>
+            </div>
+        {% endif %}
+
+        <a href="/" class="back-link">&larr; Back to Dashboard</a>
+    </div>
+</body>
+</html>

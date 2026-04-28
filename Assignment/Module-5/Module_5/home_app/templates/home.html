@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Framework - Module 5</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">
+                <i class="fas fa-bolt" style="color: white; font-size: 1.2rem;"></i>
+            </div>
+            <div class="logo-text">MODULE <span>5</span></div>
+        </div>
+    </header>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="message">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <section class="hero">
+        <h1>Rest Framework</h1>
+    </section>
+
+    <main class="container">
+        <div class="grid">
+            <!-- Question 1 -->
+            <div class="card card-blue">
+                <div class="card-icon-container">
+                    <i class="fas fa-house"></i>
+                </div>
+                <h3 class="card-title">Question 1</h3>
+                <p class="card-description">Random Joke API using Django REST Framework. Displaying dynamic content via external API.</p>
+                <a href="{% url 'random_joke' %}" class="card-link">Random Joke</a>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="card card-green">
+                <div class="card-icon-container">
+                    <i class="fas fa-gear"></i>
+                </div>
+                <h3 class="card-title">Question 2</h3>
+                <p class="card-description">Basic application initialization and project setup confirmation with statics configuration.</p>
+                <a href="{% url 'q2_home' %}" class="card-link">Statics Setup</a>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="card card-red">
+                <div class="card-icon-container">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3 class="card-title">Question 3</h3>
+                <p class="card-description">Doctor REST API for listing and creating doctor records using DRF serializers.</p>
+                <a href="{% url 'doctor-list-create' %}" class="card-link">Doctor API</a>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="card card-gold">
+                <div class="card-icon-container">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+                <h3 class="card-title">Question 4</h3>
+                <p class="card-description">POST API endpoint for adding new doctors with validated data entry.</p>
+                <a href="{% url 'add-doctor' %}" class="card-link">Add Doctor</a>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="card card-purple">
+                <div class="card-icon-container">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 class="card-title">Question 5</h3>
+                <p class="card-description">Full CRUD operations for Doctor Profiles including Edit and Delete functionalities.</p>
+                <a href="{% url 'doctorprofile-list' %}" class="card-link">Profile CRUD</a>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="card card-blue">
+                <div class="card-icon-container">
+                    <i class="fas fa-route"></i>
+                </div>
+                <h3 class="card-title">Question 6</h3>
+                <p class="card-description">Implementation of custom routing patterns and URL configuration in Django.</p>
+                <a href="{% url 'doctor-list-create-custom' %}" class="card-link">Custom Routing</a>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="card card-green">
+                <div class="card-icon-container">
+                    <i class="fas fa-list-ol"></i>
+                </div>
+                <h3 class="card-title">Question 7</h3>
+                <p class="card-description">Paginated API responses for efficient data loading in large datasets.</p>
+                <a href="{% url 'doctor-list-paginated' %}" class="card-link">Pagination</a>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="card card-red">
+                <div class="card-icon-container">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3 class="card-title">Question 8</h3>
+                <p class="card-description">Ensuring robust database connectivity and configuration for the application.</p>
+                <a href="{% url 'doctor-list' %}" class="card-link">DB Connection</a>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="card card-gold">
+                <div class="card-icon-container">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="card-title">Question 9</h3>
+                <p class="card-description">Setup of the Doctor Finder API service for location-based doctor searching.</p>
+                <a href="{% url 'doctor-finder-list' %}" class="card-link">Finder API</a>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="card card-purple">
+                <div class="card-icon-container">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3 class="card-title">Question 10</h3>
+                <p class="card-description">Authentication suite featuring Google Social Login and Twilio OTP verification.</p>
+                <a href="{% url 'login-page' %}" class="card-link">Login & OTP</a>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="card card-blue">
+                <div class="card-icon-container">
+                    <i class="fas fa-pen-to-square"></i>
+                </div>
+                <h3 class="card-title">Question 11</h3>
+                <p class="card-description">Complete RESTful CRUD interface for managing doctor records asynchronously.</p>
+                <a href="{% url 'Question_11:doctor-list' %}" class="card-link">Full CRUD</a>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="card card-green">
+                <div class="card-icon-container">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h3 class="card-title">Question 12</h3>
+                <p class="card-description">Polished user interface for comprehensive doctor profile management.</p>
+                <a href="{% url 'Question_12:doctor-list' %}" class="card-link">Interface</a>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="card card-red">
+                <div class="card-icon-container">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3 class="card-title">Question 13</h3>
+                <p class="card-description">Protected API endpoints utilizing Token-based authentication for security.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="{% url 'Question_13:token-fetcher' %}" class="card-link">Fetcher</a>
+                    <a href="{% url 'Question_13:doctor-records' %}" class="card-link">Records</a>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="card card-gold">
+                <div class="card-icon-container">
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <h3 class="card-title">Question 14</h3>
+                <p class="card-description">Integration with OpenWeather API for real-time weather data visualization.</p>
+                <a href="{% url 'weather-view' %}" class="card-link">Weather Flux</a>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="card card-purple">
+                <div class="card-icon-container">
+                    <i class="fas fa-map-location-dot"></i>
+                </div>
+                <h3 class="card-title">Question 15</h3>
+                <p class="card-description">GeoPoint implementation for address geocoding and coordinate fetching.</p>
+                <a href="{% url 'geocode-view' %}" class="card-link">GeoPoint</a>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="card card-blue">
+                <div class="card-icon-container">
+                    <i class="fab fa-github"></i>
+                </div>
+                <h3 class="card-title">Question 16</h3>
+                <p class="card-description">GitHub API integration for repository management and dashboard viewing.</p>
+                <a href="{% url 'Question_16:github-dashboard' %}" class="card-link">GitHub Mgr</a>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="card card-green">
+                <div class="card-icon-container">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <h3 class="card-title">Question 17</h3>
+                <p class="card-description">Live Twitter feed integration using the X (Twitter) API v2.</p>
+                <a href="{% url 'twitter-feed' %}" class="card-link">X Feed</a>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="card card-red">
+                <div class="card-icon-container">
+                    <i class="fas fa-earth-americas"></i>
+                </div>
+                <h3 class="card-title">Question 18</h3>
+                <p class="card-description">Global data search tool for fetching comprehensive country information.</p>
+                <a href="{% url 'country-info' %}" class="card-link">Global Finder</a>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="card card-gold">
+                <div class="card-icon-container">
+                    <i class="fas fa-envelope-circle-check"></i>
+                </div>
+                <h3 class="card-title">Question 19</h3>
+                <p class="card-description">Email confirmation workflow implemented with SendGrid API integration.</p>
+                <a href="{% url 'Question_19:register' %}" class="card-link">Email Confirm</a>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="card card-purple">
+                <div class="card-icon-container">
+                    <i class="fas fa-comment-sms"></i>
+                </div>
+                <h3 class="card-title">Question 20</h3>
+                <p class="card-description">OTP-based user registration system using Twilio SMS services.</p>
+                <a href="{% url 'q20_register' %}" class="card-link">OTP Register</a>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="card card-blue">
+                <div class="card-icon-container">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3 class="card-title">Question 21</h3>
+                <p class="card-description">Secure doctor appointment booking with Stripe Payment Gateway integration.</p>
+                <a href="{% url 'q21_checkout' %}" class="card-link">Booking</a>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="card card-green">
+                <div class="card-icon-container">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3 class="card-title">Question 22</h3>
+                <p class="card-description">Interactive map displaying doctor locations via Google Maps Platform.</p>
+                <a href="{% url 'q22_doctor_map' %}" class="card-link">Doctor Map</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

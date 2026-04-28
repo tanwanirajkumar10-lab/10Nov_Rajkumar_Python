@@ -1,0 +1,30 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Question 10</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        h1 { color: #1c1e21; margin-bottom: 30px; }
+        .google-btn { display: flex; align-items: center; justify-content: center; background-color: white; border: 1px solid #dddfe2; border-radius: 6px; padding: 10px; text-decoration: none; color: #606770; font-size: 16px; font-weight: bold; transition: background-color 0.2s; }
+        .google-btn:hover { background-color: #f8f9fa; }
+        .google-btn img { width: 24px; height: 24px; margin-right: 12px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Welcome</h1>
+        <p>Login to Question 10 using your Google account to proceed with Twilio OTP verification.</p>
+        <br>
+        <a href="{% provider_login_url 'google' %}" class="google-btn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo">
+            Sign in with Google
+        </a>
+        <br>
+        <a href="/" style="display: inline-block; margin-top: 20px; text-decoration: none; color: #606770; font-size: 14px;">&larr; Go Back To Dashboard</a>
+    </div>
+</body>
+</html>
