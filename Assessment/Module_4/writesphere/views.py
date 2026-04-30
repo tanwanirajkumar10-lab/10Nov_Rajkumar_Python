@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import login
+from django.contrib import messages
+
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 
@@ -13,14 +15,15 @@ from .forms import UserRegistrationForm, PostForm, CommentForm
 class RegisterView(CreateView):
     form_class = UserRegistrationForm
     template_name = 'writesphere/register.html'
-    success_url = reverse_lazy('writesphere:home')
+    success_url = reverse_lazy('writesphere:login')
 
     def form_valid(self, form):
         user = form.save(commit=False)
         user.role = 'author' # Default role for new signups
         user.save()
-        login(self.request, user)
+        messages.success(self.request, "Account created successfully! You can now login.")
         return super().form_valid(form)
+
 
 class CustomLoginView(LoginView):
     template_name = 'writesphere/login.html'
@@ -167,8 +170,8 @@ class CategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         )
 
     def handle_no_permission(self):
-        from django.contrib import messages
         messages.error(self.request, "You can only delete categories you created.")
+
         return HttpResponseRedirect(reverse('writesphere:home'))
 
     def get(self, request, *args, **kwargs):
