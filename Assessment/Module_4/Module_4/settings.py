@@ -29,7 +29,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$+(4ze9(2kv542i0)+%96
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '*').split(',') if h.strip()]
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,WriteSphere.pythonanywhere.com').split(',') if h.strip()]
+
 
 
 
